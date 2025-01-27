@@ -1,8 +1,8 @@
 from flask_mysqldb import MySQL
+from db import Database
+
 
 mysql = MySQL()
-
-cursor = mysql.connection.cursor()
 
 class BaseModel:
     def __init__(self, table_name, db: Database):
@@ -11,6 +11,7 @@ class BaseModel:
 
     def getAll(self) ->tuple:
         dati: tuple[tuple] 
+        cursor = None
         try:
             with cursor as self.db.getConn().cursor():
                 query = f"SELECT * FROM {self.table_name}"
