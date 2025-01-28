@@ -33,11 +33,11 @@ class Database:
         cursor.execute("SHOW TABLES")
         tables = cursor.fetchall()
         cursor.close()
-        print(tables)
+    
 
         # Creazione dinamica dei modelli per ogni tabella
         for (table_name,) in tables:
-            print(table_name)
+            print(f"tabella trovata: {table_name}")
             setattr(self, table_name, BaseModel(table_name, self))  # Inverti l'ordine dei parametri
     
     def getConn(self):
