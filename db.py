@@ -38,7 +38,7 @@ class Database:
         # Creazione dinamica dei modelli per ogni tabella
         for (table_name,) in tables:
             print(f"tabella trovata: {table_name}")
-            setattr(self, table_name, BaseModel(table_name, self))  # Inverti l'ordine dei parametri
+            setattr(self, table_name, BaseModel(table_name, self)) 
     
     def getConn(self):
         return self.mysql.connection
@@ -54,10 +54,10 @@ class BaseModel:
             conn = self.db.getConn()
             with conn.cursor() as cursor:
                 query = f"SELECT * FROM {self.table_name}"
-                print(f"Eseguo query: {query}")  # 🔹 Stampa la query
+                print(f"Eseguo query: {query}")  
                 cursor.execute(query)
                 dati = cursor.fetchall()
-                print(f"Dati recuperati: {dati}")  # 🔹 Stampa i risultati
+                print(f"Dati recuperati: {dati}")  
                 return dati
         except Exception as e:
             print(f"Errore durante il recupero dei dati: {e}")
