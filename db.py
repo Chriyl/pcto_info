@@ -76,3 +76,18 @@ class BaseModel:
         except Exception as e:
             print(f"Errore durante il recupero dei dati: {e}")
             return ()
+        
+    def insertDB(self, **attr) -> bool:
+        try:
+            conn = self.db.getConn()
+            with conn.cursor() as cursor:
+                colonne = ', '.join(attr.keys())
+                values = ', '.join(["%s"] *len(attr)) # metto i %s
+                query = f"INSERT INTO {self.table_name} ({colonne}) VALUES ({values})"
+                print(query)
+                cursor.execute(query, tuple(attr.values()))
+                conn.commit()
+                return True
+        except Exception as e:
+            print(f"errore durante l'insert {e}")
+            return False
