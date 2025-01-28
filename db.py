@@ -49,7 +49,7 @@ class BaseModel:
         self.table_name = table_name
         self.db = db
 
-    def getAll(self) -> tuple:
+    def getAll(self) -> tuple[tuple]:
         try:
             conn = self.db.getConn()
             with conn.cursor() as cursor:
@@ -58,6 +58,20 @@ class BaseModel:
                 cursor.execute(query)
                 dati = cursor.fetchall()
                 #print(f"Dati recuperati: {dati}")  
+                return dati
+        except Exception as e:
+            print(f"Errore durante il recupero dei dati: {e}")
+            return ()
+        
+    def getById(self, **id: str) -> tuple[tuple]:
+        try:
+            conn = self.db.getConn()
+            with conn.cursor() as cursor:
+                attr, value = next(iter(id.items()))
+                query = f"SELECT * FROM {self.table_name} WHERE {attr} = %s"
+                print(query)
+                cursor.execute(query, (value,))
+                dati = cursor.fetchall()
                 return dati
         except Exception as e:
             print(f"Errore durante il recupero dei dati: {e}")

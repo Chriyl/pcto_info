@@ -8,7 +8,7 @@ with app.app_context():
 
 @app.route('/')
 def home() -> str:
-    dati = db.orders.getAll()
+    dati = db.orders.getById(OrderID=10248)
     pprint(dati)
     return "<h1> ciao <h1>"
 
