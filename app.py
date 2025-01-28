@@ -9,7 +9,7 @@ with app.app_context():
 
 @app.route('/')
 def home() -> str:
-    if db.users.insertDB(username="provaDbAbs", password=generate_password_hash("1111"), nome="prova", cognome="prova"):
+    if db.users.deleteById(username="provaDbAbs"):
         print("DAJEEE")
     else:
         print(":()")

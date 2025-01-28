@@ -77,7 +77,7 @@ class BaseModel:
             print(f"Errore durante il recupero dei dati: {e}")
             return ()
         
-    def insertDB(self, **attr) -> bool:
+    def insert(self, **attr) -> bool:
         try:
             conn = self.db.getConn()
             with conn.cursor() as cursor:
@@ -91,3 +91,17 @@ class BaseModel:
         except Exception as e:
             print(f"errore durante l'insert {e}")
             return False
+        
+    def deleteById(self, **id)-> bool:
+        try:
+            conn = self.db.getConn()
+            with conn.cursor() as cursor:
+                attr, value = next(iter(id.items()))
+                query = f"DELETE FROM {self.table_name} WHERE {attr} = %s"
+                cursor.execute(query, (value,))
+                conn.commit()
+                return True
+        except Exception as e:
+            print(f"errore durante la delete {e}")
+            return False 
+            
