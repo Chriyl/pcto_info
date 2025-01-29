@@ -9,7 +9,6 @@ with app.app_context():
 
 @app.route('/')
 def home() -> str:
-    db.customers.update(CustomerName="francesco corsino", WHERE="CustomerID = 1")
     #pprint(dati)
     return "<h1> ciao <h1>"
 

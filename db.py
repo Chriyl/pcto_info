@@ -50,10 +50,8 @@ class BaseModel:
             conn = self.db.getConn()
             with conn.cursor() as cursor:
                 query = f"SELECT * FROM {self.table_name}"
-                #print(f"Eseguo query: {query}")  
                 cursor.execute(query)
                 dati = cursor.fetchall()
-                #print(f"Dati recuperati: {dati}")  
                 return dati
         except Exception as e:
             print(f"Errore durante il recupero dei dati: {e}")
@@ -65,7 +63,7 @@ class BaseModel:
             with conn.cursor() as cursor:
                 attr, value = next(iter(id.items()))
                 query = f"SELECT * FROM {self.table_name} WHERE {attr} = %s"
-                print(query)
+            
                 cursor.execute(query, (value,))
                 dati = cursor.fetchall()
                 return dati
@@ -80,7 +78,7 @@ class BaseModel:
                 colonne = ', '.join(attr.keys())
                 values = ', '.join(["%s"] *len(attr)) # metto i %s
                 query = f"INSERT INTO {self.table_name} ({colonne}) VALUES ({values})"
-                print(query)
+               
                 cursor.execute(query, tuple(attr.values()))
                 conn.commit()
                 return True
@@ -127,7 +125,7 @@ class BaseModel:
                         values.append(valore)
                 cursor.execute(query, tuple(values))
                 conn.commit()
-                print(query)
+                
                 return True
         except Exception as e:
             print(f"errore durante la update {e}")
