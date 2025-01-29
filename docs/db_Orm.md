@@ -7,7 +7,7 @@ le query sono sicure e protette con placeholder per prevenire *SQLI*
 
 # Funzionamento
 
-nel file app.py bisognerá creare un oggetto `Database` e passargli l'app context nel costruttore per permetterli di lavorare con i dati dell'app flask e settare un file `db.env` con i parametri della connessione.
+nel file `app.py` bisognerá creare un oggetto `Database` e passargli l'app context nel costruttore per permetterli di lavorare con i dati dell'app flask e settare un file `db.env` con i parametri della connessione.
 
 il costruttore del db mapperá ad ogni tabella del db un attributo con il medesimo nome di tipo `BaseModel` che dispone di diversi metodi
 

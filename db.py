@@ -38,6 +38,19 @@ class Database:
     
     def getConn(self):
         return self.mysql.connection
+    
+    def getTables(self) -> tuple[tuple]:
+        _conn = self.getConn()
+        with _conn.cursor() as cursor:
+            try:
+                query: str = "SHOW TABLES"
+                cursor.execute(query)
+                tables = cursor.fetchall()
+                return tables
+            except Exception as e:
+                print(f"errore con il fetch delle tabelle {e}")
+                return ()
+
 
 
 class BaseModel:
