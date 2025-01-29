@@ -1,3 +1,2 @@
 *.env
 /pcto
-db.py
