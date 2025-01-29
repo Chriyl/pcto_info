@@ -9,12 +9,10 @@ with app.app_context():
 
 @app.route('/')
 def home() -> str:
-    if db.users.deleteById(username="provaDbAbs"):
-        print("DAJEEE")
-    else:
-        print(":()")
+    db.customers.update(CustomerName="francesco corsino", WHERE="CustomerID = 1")
     #pprint(dati)
     return "<h1> ciao <h1>"
+
 
 
 app.run(debug=True)

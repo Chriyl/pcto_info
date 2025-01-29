@@ -2,6 +2,7 @@ from flask_mysqldb import MySQL
 import os
 from typing import TYPE_CHECKING
 from dotenv import load_dotenv
+import re
 load_dotenv("db.env")
 
 DB_USER = os.getenv("MYSQL_USER")
@@ -9,11 +10,6 @@ DB_PASSWORD = os.getenv("MYSQL_PASSWORD")
 DB_DBNAME = os.getenv("MYSQL_DB")
 DB_HOST = os.getenv("MYSQL_HOST")
 DB_PORT = int(os.getenv("MYSQL_PORT"))
-
-
-
-
-
 
 
 class Database:
@@ -104,4 +100,35 @@ class BaseModel:
         except Exception as e:
             print(f"errore durante la delete {e}")
             return False 
-            
+        
+    def update(self, **attr) -> bool:
+        try:
+            conn = self.db.getConn()
+            with conn.cursor() as cursor:
+                condition = attr.pop("WHERE", "")
+                values = list(attr.values())
+                query: str = f"UPDATE {self.table_name} SET "
+
+                for colonna in attr.keys():
+                    query += f"{colonna} = %s, "
+                
+                query = query[:-2]
+
+                if condition:
+                    operators = r"(\w+)\s*(=|!=|<|>|<=|>=|LIKE|IN)\s*(.+)" #espressione regolare che mi verifica se ci sono almeno un operatore
+                    #per vedere se l'espressione é valida (\w) colonna e (.+) parametri
+                    #query += f" WHERE {condition}"
+                
+                    isFormatted = re.match(operators, condition, re.IGNORECASE)
+                    
+                    if isFormatted:
+                        colonna, operatore, valore = isFormatted.groups()
+                        query += f" WHERE {colonna.strip()} {operatore.strip()} %s"
+                        values.append(valore)
+                cursor.execute(query, tuple(values))
+                conn.commit()
+                print(query)
+                return True
+        except Exception as e:
+            print(f"errore durante la update {e}")
+            return False
