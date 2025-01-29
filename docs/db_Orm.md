@@ -16,6 +16,7 @@ il costruttore del db mapperá ad ogni tabella del db un attributo con il medesi
 
 - Database
     - `GetConn()` ritorna la connessione al db
+    - `GetTables()` ritorna tutte le tabelle del db in uso
 
 - BaseModel
     - `getAll()` ritorna tutti i dati nella tabella
