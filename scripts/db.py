@@ -1,5 +1,26 @@
+from flask import Flask
+from flask_mysqldb import MySQL
 
-"""
+app = Flask()
+
+
+app.config['MYSQL_HOST'] = "localhost"
+app.config['MYSQL_USER'] = "user"
+app.config['MYSQL_PASSWORD'] = "pswd"
+app.config['MYSQL_DB'] = "w3schools"
+app.config['MYSQL_PORT'] = 3306
+mysql = MySQL()
+conn = mysql.connection
+cursor = conn.cursor()
+
+
+
+Query = """
+
+CREATE DATABASE Biblioteca;
+
+USE Biblioteca;
+
 CREATE TABLE IF NOT EXISTS Tessere(
         idTessera CHAR(36),
         email varchar(255) NOT NULL,
@@ -54,6 +75,8 @@ CREATE TABLE IF NOT EXISTS Prestiti(
         FOREIGN KEY (idTessera) REFERENCES Tessere(idTessera) ON DELETE CASCADE
 );
 
-
-
 """
+
+cursor.execute(Query)
+conn.commit()
+cursor.close()
