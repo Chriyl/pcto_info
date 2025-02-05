@@ -22,7 +22,7 @@ CREATE DATABASE Biblioteca;
 USE Biblioteca;
 
 CREATE TABLE IF NOT EXISTS Tessere(
-        idTessera CHAR(36),
+        idTessera CHAR(39),
         email varchar(255) NOT NULL,
         password varchar(255) NOT NULL,
         tel varchar(12) NOT NULL,
