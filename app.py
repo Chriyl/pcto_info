@@ -1,8 +1,8 @@
 from flask import Flask
 from werkzeug.security import generate_password_hash
-from db import Database
+from _libs.db import Database
 from pprint import pprint
-from models import UserModel
+from _libs.models import UserModel
 
 app = Flask(__name__)
 with app.app_context():  
@@ -14,6 +14,6 @@ with app.app_context():
 def home() -> str:
     return "<h1> ciao <h1>"
 
-
+    
 
 app.run(debug=True)
