@@ -58,4 +58,12 @@ CREATE TABLE IF NOT EXISTS Prestiti(
         FOREIGN KEY (idTessera) REFERENCES Tessere(idTessera) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS Catalogo(
+        idLibro INT,
+        sezione VARCHAR(255),
+        indice INT,
+        disponibile BOOLEAN,
+        FOREIGN KEY (idLibro) REFERENCES Libri(id) ON DELETE CASCADE
+)
+
 """
