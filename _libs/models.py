@@ -10,15 +10,45 @@ per maggiori info vai su "/docs/models.md"
 
 """
 
+class TesseraModel(TypedDict):
+    idTessera: str
+    email: str
+    password: str
+    tel: str
+
 class UserModel(TypedDict):
-    #SupplierID: int
-    SupplierName: str
-    ContactName: str
-    Address: str
-    City: str
-    PostalCode: str
-    Country: str
-    Phone: str
+    idTessera: str
+    nome: str
+    cognome: str
+    numeroPrestiti: int
+    
+class AutoreModel(TypedDict):
+    id: int
+    nome: str
+    cognome: str
+    DataNascita: str
+    DataMorte: str
+    bio: str
+    
+class LibroModel(TypedDict):
+    id: int
+    ISBN: str
+    titolo: str
+    genere: str
+    dataPub: str
+
+class ProduzioneModel(TypedDict):
+    idAutore: int
+    idLibro: int
+
+class PrestitoModel(TypedDict):
+    id: int
+    idLibro: int
+    idTessera: str
+    dataInizio: str
+    dataFine: str
+    restituito: bool
+    
 
 
 
