@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash
 from _libs.db import Database
 from pprint import pprint
 from _libs.models import UserModel
+from _libs.utils import *
 
 app = Flask(__name__)
 with app.app_context():  
